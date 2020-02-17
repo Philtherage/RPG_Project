@@ -7,17 +7,22 @@ public class PlayerMovement : MonoBehaviour
 {
     
     NavMeshAgent navMeshAgent;
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         MoveToPoint();
+        Vector3 velocity = navMeshAgent.velocity;
+        Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+        animator.SetFloat("forwardSpeed", localVelocity.z);
     }
 
     private void MoveToPoint()
@@ -29,8 +34,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButton("Fire1"))
         {
-            Physics.Raycast(ray, out hit);
-            navMeshAgent.SetDestination(hit.point);
+            bool hitSomething = Physics.Raycast(ray, out hit);
+            if (hitSomething)
+            {
+                navMeshAgent.SetDestination(hit.point);
+
+            }
         }
     }
 
