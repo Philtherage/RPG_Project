@@ -22,6 +22,12 @@ namespace RPG.Movement
         public void MoveTo(Vector3 destination)
         {
             GetComponent<NavMeshAgent>().SetDestination(destination);
+            GetComponent<NavMeshAgent>().isStopped = false;
+        }
+
+        public void StopMoving()
+        {
+            GetComponent<NavMeshAgent>().isStopped = true;
         }
 
         private void UpdateAnimation()

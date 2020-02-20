@@ -9,3 +9,5 @@
 * Section 2: Project Folder Structure.
 
 * Section 4: Implementing Action Priority.
+
+* Section 4: Move Within Range.
