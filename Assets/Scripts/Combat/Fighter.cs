@@ -35,6 +35,14 @@ namespace RPG.Combat
             print("Attacking target");
         }
 
+        public void Cancel()
+        {
+            target = null;
+        }
+
+
+
+
     }
 
 }

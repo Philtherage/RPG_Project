@@ -25,6 +25,7 @@ namespace RPG.Control
             if (Input.GetButton("Fire1") && hitSomething)
             {
                 GetComponent<Mover>().MoveTo(hit.point);
+                GetComponent<Fighter>().Cancel();
             }
             return hitSomething;
         }

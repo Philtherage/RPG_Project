@@ -11,3 +11,5 @@
 * Section 4: Implementing Action Priority.
 
 * Section 4: Move Within Range.
+
+* Section 4: Cancelling Combat With Movement.
