@@ -76,6 +76,11 @@ namespace RPG.Combat
             if (target == null) return;            
             target.TakeDamage(weaponDamage);         
         }
+
+        public bool CanAttack()
+        {
+            return target != null && !target.GetIsDead();
+        }
     }
 
 }

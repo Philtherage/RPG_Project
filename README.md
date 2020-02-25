@@ -33,3 +33,5 @@
 * Section 4: Stop Attacking Already.
 
 * Section 4: Look Them In The Eyes.
+
+* Section 4: Bugs? What Bugs?
