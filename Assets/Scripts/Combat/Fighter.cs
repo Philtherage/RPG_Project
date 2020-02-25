@@ -15,11 +15,17 @@ namespace RPG.Combat
         Transform target;
         float timeSinceLastAttack = 0;
 
+        Animator animator;
+
+        void Start()
+        {
+            animator = GetComponent<Animator>();
+        }
+
         // Update is called once per frame
         void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
-
 
             if(target != null)
             {
@@ -43,7 +49,7 @@ namespace RPG.Combat
             if (timeSinceLastAttack >= timeBetweenAttacks)
             {
                 // This will trigger the hit event...
-                GetComponent<Animator>().SetTrigger("attack");
+                animator.SetTrigger("attack");
                 timeSinceLastAttack = 0f;
             }
             
@@ -63,7 +69,7 @@ namespace RPG.Combat
 
         void Hit() // Animation Event
         {
-            target.GetComponent<Health>().TakeDamage(weaponDamage);
+            target.GetComponent<Health>().TakeDamage(weaponDamage);          
         }
     }
 

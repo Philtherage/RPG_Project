@@ -369,6 +369,11 @@ PrefabInstance:
       propertyPath: m_BaseOffset
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7998031774552045290, guid: c655cf4421b2fad4db8cf05849bb2354,
+        type: 3}
+      propertyPath: health
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -2322957551397321442, guid: c655cf4421b2fad4db8cf05849bb2354, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c655cf4421b2fad4db8cf05849bb2354, type: 3}

@@ -27,3 +27,5 @@
 * Section 4: Nested Prefabs And Variants.
 
 * Section 4: Using Prefab Variants.
+
+* Section 4: Trigger Death Animation.
