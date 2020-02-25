@@ -19,3 +19,7 @@
 * Section 4: Dependency Inversion With Interfaces.
 
 * Section 4: Add Attack Animation.
+
+* Section 4: Throttling Our Attacks.
+
+
