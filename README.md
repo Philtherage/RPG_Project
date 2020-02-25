@@ -17,3 +17,5 @@
 * Section 4: Decoupling Dependency Cycles.
 
 * Section 4: Dependency Inversion With Interfaces.
+
+* Section 4: Add Attack Animation.
