@@ -6,12 +6,13 @@ namespace RPG.Combat
 {
     public class Health : MonoBehaviour
     {
-        [SerializeField] int health = 50;
+        [SerializeField] float health = 50;
 
-        public int GetHealth() { return health; }
+        public float GetHealth() { return health; }
         
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
+            if(health <= Mathf.Epsilon) { return; }           
             health -= damage;
         }
             

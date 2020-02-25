@@ -23,3 +23,5 @@
 * Section 4: Throttling Our Attacks.
 
 * Section 4: Taking Damage.
+
+* Section 4: Nested Prefabs And Variants.
