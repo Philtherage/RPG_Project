@@ -59,9 +59,9 @@ namespace RPG.Combat
             target = null;
         }
 
-        void Hit() // Animation Event
+        void Hit(int damage) // Animation Event
         {
-
+            target.GetComponent<Health>().TakeDamage(damage);
         }
     }
 
