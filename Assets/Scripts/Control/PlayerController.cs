@@ -9,8 +9,6 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
-
-
         // Update is called once per frame
         void Update()
         {
@@ -25,7 +23,6 @@ namespace RPG.Control
             if (Input.GetButton("Fire1") && hitSomething)
             {
                 GetComponent<Mover>().StartMoveAction(hit.point);
-
             }
             return hitSomething;
         }

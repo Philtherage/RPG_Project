@@ -6,27 +6,20 @@ using RPG.Core;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour
+    public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float weaponRange = 2f;
 
         Transform target;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
         // Update is called once per frame
         void Update()
         {
-            if( target != null)
+            if(target != null)
             {
                 GetComponent<Mover>().MoveTo(target.position);
-                float distance = Vector3.Distance(transform.position, target.position);            
+                float distance = Vector3.Distance(transform.position, target.position);
                 if (distance <= weaponRange) { GetComponent<Mover>().StopMoving(); }
-
             }
         }
 

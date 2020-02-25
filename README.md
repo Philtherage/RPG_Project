@@ -15,3 +15,5 @@
 * Section 4: Cancelling Combat With Movement.
 
 * Section 4: Decoupling Dependency Cycles.
+
+* Section 4: Dependency Inversion With Interfaces.
