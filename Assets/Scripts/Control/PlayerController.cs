@@ -24,8 +24,8 @@ namespace RPG.Control
             bool hitSomething = Physics.Raycast(GetMouseRay(), out hit);
             if (Input.GetButton("Fire1") && hitSomething)
             {
-                GetComponent<Mover>().MoveTo(hit.point);
-                GetComponent<Fighter>().Cancel();
+                GetComponent<Mover>().StartMoveAction(hit.point);
+
             }
             return hitSomething;
         }
