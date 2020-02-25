@@ -13,3 +13,5 @@
 * Section 4: Move Within Range.
 
 * Section 4: Cancelling Combat With Movement.
+
+* Section 4: Decoupling Dependency Cycles.
