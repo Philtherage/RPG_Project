@@ -25,3 +25,5 @@
 * Section 4: Taking Damage.
 
 * Section 4: Nested Prefabs And Variants.
+
+* Section 4: Using Prefab Variants.
