@@ -51,11 +51,17 @@ namespace RPG.Combat
         {
             if (timeSinceLastAttack >= timeBetweenAttacks)
             {
-                // This will trigger the hit event...
-                animator.SetTrigger("attack");
+                TriggerAttack();
                 timeSinceLastAttack = 0f;
             }
-            
+
+        }
+
+        private void TriggerAttack()
+        {
+            animator.ResetTrigger("stopAttack");
+            // This will trigger the hit event...
+            animator.SetTrigger("attack");
         }
 
         public void Attack(CombatTarget combatTarget)
@@ -67,8 +73,14 @@ namespace RPG.Combat
 
         public void Cancel()
         {
-            animator.SetTrigger("stopAttack");
+            StopAttack();
             target = null;
+        }
+
+        private void StopAttack()
+        {
+            animator.ResetTrigger("attack");
+            animator.SetTrigger("stopAttack");
         }
 
         void Hit() // Animation Event
