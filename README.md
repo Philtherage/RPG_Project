@@ -29,3 +29,7 @@
 * Section 4: Using Prefab Variants.
 
 * Section 4: Trigger Death Animation.
+
+* Section 4: Stop Attacking Already.
+
+* Section 4: Look Them In The Eyes.

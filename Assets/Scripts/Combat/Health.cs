@@ -9,7 +9,7 @@ namespace RPG.Combat
         [SerializeField] float healthPoints = 50;
 
 
-        bool dead = false;
+        bool isDead = false;
 
 
         Animator animator;
@@ -18,6 +18,8 @@ namespace RPG.Combat
         {
             animator = GetComponent<Animator>();
         }
+
+        public bool GetIsDead() { return isDead; }
 
         public float GetHealth() { return healthPoints; }
         
@@ -29,10 +31,10 @@ namespace RPG.Combat
 
         private void Die()
         {
-            if (dead) return;
+            if (isDead) return;
             if (healthPoints == 0)
             {
-                dead = true;
+                isDead = true;
                 animator.SetTrigger("dead");
             }
         }
