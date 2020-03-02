@@ -26,7 +26,7 @@ namespace RPG.Combat
         void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
-            
+            if (GetComponent<Health>().GetIsDead()) { Cancel(); }
             if (target != null)
             {
                 if (target.GetIsDead()) { Cancel(); return; }
@@ -64,7 +64,7 @@ namespace RPG.Combat
             animator.SetTrigger("attack");
         }
 
-        public void Attack(CombatTarget combatTarget)
+        public void Attack(GameObject combatTarget)
         {
             target = combatTarget.GetComponent<Health>();
             GetComponent<ActionScheduler>().StartAction(this);           

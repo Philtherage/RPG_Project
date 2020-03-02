@@ -663,10 +663,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 010dbcaa-e6a6-48d4-9f0f-14ffabddfc45
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: RPG_Project
+  organizationId: philtherage
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
