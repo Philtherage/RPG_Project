@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using RPG.Combat;
-using RPG.Movement;
+using RPG.Core;
 
 namespace RPG.Control
 {
@@ -11,21 +11,35 @@ namespace RPG.Control
     {
         [SerializeField] float chaseRange = 5f;
 
-        Transform target;
+        GameObject player;
+        Fighter fighter;
+        Health health;
 
-        // Update is called once per frame
+        private void Start()
+        {      
+            player = GameObject.FindWithTag("Player");
+            fighter = GetComponent<Fighter>();
+            health = GetComponent<Health>();
+        }
+
         void Update()
         {
-            target = GameObject.FindWithTag("Player").transform;
-            float distance = Vector3.Distance(transform.position, target.transform.position);
-            if(distance <= chaseRange)
-            {
-                if(GetComponent<Health>().GetIsDead()) { GetComponent<Mover>().StopMoving(); return; }
+            if (health.GetIsDead()) return;
 
-                GetComponent<Fighter>().Attack(target.gameObject);
-                
-                GetComponent<Mover>().MoveTo(target.position);
+            if (InAttackRangeOfPlayer() && fighter.CanAttack(player))
+            {               
+                fighter.Attack(player);                
             }
+            else
+            {
+                GetComponent<Fighter>().Cancel(); 
+            }
+        }
+
+        private bool InAttackRangeOfPlayer()
+        {
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+            return distance <= chaseRange;
         }
 
         private void OnDrawGizmosSelected()

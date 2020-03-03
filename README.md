@@ -37,3 +37,5 @@
 * Section 4: Bugs? What Bugs?
 
 * Section 5: Swappable Control Systems.
+
+* Section 5: Disable Control When Dead.

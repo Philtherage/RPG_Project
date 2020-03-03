@@ -8,9 +8,20 @@ namespace RPG.Movement
 {
     public class Mover : MonoBehaviour, IAction
     {
+
+
+        NavMeshAgent navMeshAgent;
+        Health health;
+        void Start()
+        {
+            navMeshAgent = GetComponent<NavMeshAgent>();
+            health = GetComponent<Health>();
+        }
+
         // Update is called once per frame
         void Update()
         {
+            navMeshAgent.enabled = !health.GetIsDead();
             UpdateAnimation();
         }
 
@@ -21,19 +32,19 @@ namespace RPG.Movement
         }
 
         public void MoveTo(Vector3 destination)
-        {
-            GetComponent<NavMeshAgent>().SetDestination(destination);
-            GetComponent<NavMeshAgent>().isStopped = false;
+        {           
+            navMeshAgent.SetDestination(destination);
+            navMeshAgent.isStopped = false;
         }
 
         public void StopMoving()
         {
-            GetComponent<NavMeshAgent>().isStopped = true;
+            navMeshAgent.isStopped = true;
         }
 
         private void UpdateAnimation()
         {
-            Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
+            Vector3 velocity = navMeshAgent.velocity;
             Vector3 localVelocity = transform.InverseTransformDirection(velocity);
             GetComponent<Animator>().SetFloat("forwardSpeed", localVelocity.z);
         }
