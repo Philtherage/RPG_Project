@@ -4,22 +4,35 @@ using UnityEngine;
 using UnityEngine.AI;
 using RPG.Combat;
 using RPG.Core;
+using RPG.Movement;
 
 namespace RPG.Control
 {
     public class AIController : MonoBehaviour
     {
         [SerializeField] float chaseRange = 5f;
+        [SerializeField] float supisionDelay = 2f;
 
         GameObject player;
         Fighter fighter;
         Health health;
+        Mover mover;
+        ActionScheduler actionScheduler;
+
+
+
+        Vector3 guardPos;
+        float timeSinceSeenPlayer = Mathf.Infinity;
 
         private void Start()
         {      
             player = GameObject.FindWithTag("Player");
             fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
+            mover = GetComponent<Mover>();
+            actionScheduler = GetComponent<ActionScheduler>();
+
+            guardPos = transform.position;
         }
 
         void Update()
@@ -27,13 +40,15 @@ namespace RPG.Control
             if (health.GetIsDead()) return;
 
             if (InAttackRangeOfPlayer() && fighter.CanAttack(player))
-            {               
+            {
+                timeSinceSeenPlayer = 0f;
                 fighter.Attack(player);                
             }
             else
-            {
-                GetComponent<Fighter>().Cancel(); 
+            {            
+                Evade();
             }
+            timeSinceSeenPlayer += Time.deltaTime;
         }
 
         private bool InAttackRangeOfPlayer()
@@ -47,5 +62,19 @@ namespace RPG.Control
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, chaseRange);
         }
+
+        private void Evade()
+        {
+            actionScheduler.CancelCurrentAction();
+            mover.StopMoving();
+
+            if (timeSinceSeenPlayer >= supisionDelay)
+            {
+                mover.StartMoveAction(guardPos);
+            }                      
+        }
+
     }
+
+
 }
