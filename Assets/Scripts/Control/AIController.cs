@@ -66,7 +66,6 @@ namespace RPG.Control
         private void Evade()
         {
             actionScheduler.CancelCurrentAction();
-            mover.StopMoving();
 
             if (timeSinceSeenPlayer >= supisionDelay)
             {
