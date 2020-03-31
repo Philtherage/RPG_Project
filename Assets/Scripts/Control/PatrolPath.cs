@@ -15,7 +15,7 @@ namespace RPG.Control
             
             for(int i = 0; i < length; i++)
             {
-                int nextPoint = GetNextIndex(i, length);
+                int nextPoint = GetNextIndex(i);
 
                 Gizmos.color = Color.red;
                 Gizmos.DrawSphere(GetWaypoint(i), waypointGizmoRadius);
@@ -26,11 +26,11 @@ namespace RPG.Control
 
         }
 
-        private static int GetNextIndex(int i, int length)
+        public int GetNextIndex(int i)
         {
             int j;
 
-            if(i == length - 1)
+            if(i == transform.childCount - 1)
             {
                 j = 0;              
             }
@@ -41,7 +41,7 @@ namespace RPG.Control
             return j;
         }
 
-        private Vector3 GetWaypoint(int i)
+        public Vector3 GetWaypoint(int i)
         {
             return transform.GetChild(i).position;
         }

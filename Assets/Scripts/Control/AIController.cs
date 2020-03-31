@@ -12,17 +12,21 @@ namespace RPG.Control
     {
         [SerializeField] float chaseRange = 5f;
         [SerializeField] float supisionDelay = 2f;
+        [SerializeField] PatrolPath patrolPath;
+        [SerializeField] float waypointTolerance = 1f;
 
         GameObject player;
         Fighter fighter;
         Health health;
         Mover mover;
         ActionScheduler actionScheduler;
+        
 
 
 
         Vector3 guardPos;
         float timeSinceSeenPlayer = Mathf.Infinity;
+        int currentWaypointIndex = 0;
 
         private void Start()
         {      
@@ -46,7 +50,7 @@ namespace RPG.Control
             }
             else
             {            
-                Evade();
+                PatrolBehaviour();
             }
             timeSinceSeenPlayer += Time.deltaTime;
         }
@@ -63,17 +67,43 @@ namespace RPG.Control
             Gizmos.DrawWireSphere(transform.position, chaseRange);
         }
 
-        private void Evade()
+        private void PatrolBehaviour()
         {
             actionScheduler.CancelCurrentAction();
 
+            Vector3 nextPosition = guardPos;
+            if(patrolPath != null)
+            {
+                if (AtWaypoint())
+                {
+                    CycleWaypoint();
+                }
+                nextPosition = GetCurrentWaypoint();
+            }
+
             if (timeSinceSeenPlayer >= supisionDelay)
             {
-                mover.StartMoveAction(guardPos);
+                mover.StartMoveAction(nextPosition);
             }                      
+        }
+        private bool AtWaypoint()
+        {
+            return Vector3.Distance(transform.position, GetCurrentWaypoint()) < waypointTolerance;
+        }
+
+        private void CycleWaypoint()
+        {
+            currentWaypointIndex = patrolPath.GetNextIndex(currentWaypointIndex);
+        }
+
+        private Vector3 GetCurrentWaypoint()
+        {
+            return patrolPath.GetWaypoint(currentWaypointIndex);
         }
 
     }
+
+
 
 
 }
