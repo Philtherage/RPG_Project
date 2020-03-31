@@ -39,3 +39,5 @@
 * Section 5: Swappable Control Systems.
 
 * Section 5: Disable Control When Dead.
+
+* Section 5: Dwelling At Waypoints

@@ -14,6 +14,7 @@ namespace RPG.Control
         [SerializeField] float supisionDelay = 2f;
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float waypointTolerance = 1f;
+        [SerializeField] float waypointDwellTime = 1f;
 
         GameObject player;
         Fighter fighter;
@@ -22,11 +23,10 @@ namespace RPG.Control
         ActionScheduler actionScheduler;
         
 
-
-
         Vector3 guardPos;
         float timeSinceSeenPlayer = Mathf.Infinity;
         int currentWaypointIndex = 0;
+        float waypointArivalTime = Mathf.Infinity;
 
         private void Start()
         {      
@@ -37,6 +37,8 @@ namespace RPG.Control
             actionScheduler = GetComponent<ActionScheduler>();
 
             guardPos = transform.position;
+            if(patrolPath != null) { transform.position = patrolPath.GetWaypoint(0); }
+            
         }
 
         void Update()
@@ -46,13 +48,19 @@ namespace RPG.Control
             if (InAttackRangeOfPlayer() && fighter.CanAttack(player))
             {
                 timeSinceSeenPlayer = 0f;
-                fighter.Attack(player);                
+                fighter.Attack(player);
             }
             else
-            {            
+            {
                 PatrolBehaviour();
             }
+            UpdateTimers();
+        }
+
+        private void UpdateTimers()
+        {
             timeSinceSeenPlayer += Time.deltaTime;
+            waypointArivalTime += Time.deltaTime;
         }
 
         private bool InAttackRangeOfPlayer()
@@ -73,12 +81,15 @@ namespace RPG.Control
 
             Vector3 nextPosition = guardPos;
             if(patrolPath != null)
-            {
+            {             
                 if (AtWaypoint())
-                {
-                    CycleWaypoint();
+                {                                      
+                    if(waypointArivalTime >= waypointDwellTime)
+                    {                        
+                        CycleWaypoint();
+                    }
                 }
-                nextPosition = GetCurrentWaypoint();
+                nextPosition = GetCurrentWaypoint();                
             }
 
             if (timeSinceSeenPlayer >= supisionDelay)
@@ -94,6 +105,7 @@ namespace RPG.Control
         private void CycleWaypoint()
         {
             currentWaypointIndex = patrolPath.GetNextIndex(currentWaypointIndex);
+            waypointArivalTime = 0f;
         }
 
         private Vector3 GetCurrentWaypoint()
